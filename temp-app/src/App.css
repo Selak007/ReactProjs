@@ -1,0 +1,69 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.app-container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+  transition: 0.3s;
+}
+
+.app-container:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  margin: 15px 0;
+  font-size: 22px;
+  color: #444;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Specific styles */
+.decrease-btn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.increase-btn {
+  background-color: #1dd1a1;
+  color: white;
+}
+
+.toggle-btn {
+  background-color: #54a0ff;
+  color: white;
+}

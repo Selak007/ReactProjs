@@ -1,0 +1,217 @@
+/* ===== Import Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@500&display=swap');
+
+/* ===== Custom Properties (Theme) ===== */
+:root {
+    --bg-start: #0f172a; /* Slate 900 */
+    --bg-end: #334155; /* Slate 700 */
+    --accent-start: #7c3aed; /* Violet 600 */
+    --accent-end: #db2777; /* Pink 600 */
+    --text-primary: #e2e8f0; /* Slate 200 */
+    --text-secondary: #94a3b8; /* Slate 400 */
+    --surface-bg: rgba(30, 41, 59, 0.4);
+    --surface-border: rgba(148, 163, 184, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --glow-color: rgba(124, 58, 237, 0.5);
+}
+
+/* ===== Global Styles ===== */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* Background Animated Elements */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    z-index: -1;
+    animation: moveGlow 25s infinite alternate ease-in-out;
+}
+body::before {
+    width: 400px; height: 400px;
+    background: var(--accent-start);
+    top: -10%; left: -10%;
+}
+body::after {
+    width: 300px; height: 300px;
+    background: var(--accent-end);
+    bottom: -15%; right: -15%;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes moveGlow {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(100px, 150px) rotate(180deg); }
+}
+
+/* ===== App Container (Matches your <div className='App'>) ===== */
+.App {
+    background: var(--surface-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 56px; /* CHANGED: Increased padding */
+    width: 540px;  /* CHANGED: Increased width for larger text */
+    box-shadow: 0 20px 60px var(--shadow-color);
+    border: 1px solid var(--surface-border);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ===== Title ===== */
+.App h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    margin: 0;
+    transition: opacity 0.5s, filter 0.5s;
+}
+
+/* ===== TimeDisplay Component ===== */
+.time-display {
+    font-family: 'Robotox', monospace;
+    font-size: 128px; /* CHANGED: Made font even larger */
+    font-weight: 500;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 32px 0; /* CHANGED: Increased vertical margin */
+    position: relative;
+    transition: transform 0.3s ease-out, text-shadow 0.3s ease-out;
+}
+
+/* ===== Running State & Focus Mode ===== */
+.timer-display.running {
+    animation: active-pulse 1.2s infinite alternate ease-in-out;
+}
+
+.App.timer-active .time-setter,
+.App.timer-active h1 {
+    opacity: 0.4;
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+@keyframes active-pulse {
+    from {
+        text-shadow: 0 0 15px var(--glow-color);
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 35px var(--glow-color), 0 0 15px var(--accent-end);
+        transform: scale(1.03);
+    }
+}
+
+/* ===== ControlButtons Component ===== */
+.control-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+    margin: 0;
+}
+
+.control-buttons button {
+    padding: 16px 10px;
+    font-size: 16px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--surface-border);
+    color: var(--text-primary);
+    background-color: var(--surface-bg);
+    transition: all 0.25s ease-out;
+}
+.control-buttons button:active { transform: scale(0.96); }
+.control-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
+.control-buttons button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.control-buttons .start:hover:not(:disabled) {
+    background-color: #16a34a; border-color: #22c55e;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+}
+.control-buttons .pause:hover:not(:disabled) {
+    background-color: #dc2626; border-color: #ef4444;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+.control-buttons .reset:hover:not(:disabled) {
+    background-color: #475569; border-color: #64748b;
+    box-shadow: 0 0 20px rgba(100, 116, 139, 0.6);
+}
+
+/* ===== TimeSetter Component ===== */
+.time-setter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0 0 0;
+    transition: opacity 0.5s, filter 0.5s;
+}
+
+.time-setter input {
+    width: 80px;
+    padding: 16px;
+    font-size: 28px;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid var(--surface-border);
+    border-radius: 14px;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.5);
+    color: var(--text-primary);
+    caret-color: var(--accent-start);
+    transition: all 0.3s ease;
+}
+.time-setter input:focus {
+    outline: none;
+    border-color: var(--accent-start);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+.time-setter span {
+    font-family: 'Fira Code', monospace;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transform: translateY(-2px);
+}
+.time-setter button {
+    padding: 16px 24px;
+    font-size: 16px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-end) 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+    transition: all 0.3s ease;
+    margin-left: 8px;
+}
+.time-setter button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(124, 58, 237, 0.6);
+}
