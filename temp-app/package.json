@@ -2,6 +2,7 @@
   "name": "temp-app",
   "private": true,
   "version": "0.0.0",
+  "homepage": "[https://Selak007.github.io/ReactProjs/temp-app](https://Selak007.github.io/ReactProjs/temp-app)",
   "type": "module",
   "scripts": {
     "dev": "vite",
