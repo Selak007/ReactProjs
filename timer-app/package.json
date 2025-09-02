@@ -2,7 +2,7 @@
   "name": "timer-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "[https://Selak007.github.io/ReactProjs/temp-app](https://Selak007.github.io/ReactProjs/temp-app)",
+  "homepage": "[https://Selak007.github.io/ReactProjs/timer-app](https://Selak007.github.io/ReactProjs/timer-app)",
   "type": "module",
   "scripts": {
     "dev": "vite",
